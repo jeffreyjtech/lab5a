@@ -50,11 +50,19 @@ Test this function by hand in the console to get it working, and when you think 
 
 // Write your code here
 function sumAndMultiply(a, b, c) { //eslint-disable-line
-  let tempSum = sum(a, b)[0];
-  tempSum = sum(tempSum, c)[0];
+  // CLASS 06 REVIEW: These can be written as one liners
 
-  let tempProduct = multiply(a, b)[0];
-  tempProduct = multiply(tempProduct, c)[0];
+  // ORIGINAL:
+  // let tempSum = sum(a, b)[0];
+  // tempSum = sum(tempSum, c)[0];
+
+  // let tempProduct = multiply(a, b)[0];
+  // tempProduct = multiply(tempProduct, c)[0];
+
+  // One-linerified code:
+  let tempSum = sum(sum(a, b)[0], c)[0];
+
+  let tempProduct = multiply(multiply(a,b)[0],c)[0];
 
   return [
     tempSum,
@@ -88,7 +96,14 @@ function sumArray(sumArr) { //eslint-disable-line
 
   return [
     tempSum,
-    `${sumArr[0]},${sumArr[1]},${sumArr[2]} was passed in as an array of numbers, and ${tempSum} is their sum.`,
+
+    // CLASS 06 REVIEW: Arrays automatically get formatted into 'x,y,z' when turned into strings with template literal or .toString()
+
+    //ORIGINAL:
+    // `${sumArr[0]},${sumArr[1]},${sumArr[2]} was passed in as an array of numbers, and ${tempSum} is their sum.`,
+
+    // NEW:
+    `${sumArr} was passed in as an array of numbers, and ${tempSum} is their sum.`,
   ];
 }
 
@@ -146,17 +161,21 @@ let testDynamicArray = [1,2,3,4,5]; //eslint-disable-line
 function multiplyAnyArray(dynamicArray) { //eslint-disable-line
   // for loop to multiply and create message
   let arrProduct = 1;
-  let arrString = '';
+  // CLASS 06 REVIEW: Constructing this string can be avoided using the array-to-string behavior.
+  // let arrString = '';
   for (let i = 0; i < dynamicArray.length; i++){
     arrProduct = multiply(arrProduct,dynamicArray[i])[0];
-    arrString += dynamicArray[i].toString();
-    if (i < dynamicArray.length-1){
-      arrString += ',';
-    }
+    // CLASS 06 REVIEW: String constructor logic not needed, refer to previous comment
+    // arrString += dynamicArray[i].toString();
+    // if (i < dynamicArray.length-1){
+    //   arrString += ',';
+    // }
   }
   return [
     arrProduct,
-    `The numbers ${arrString} have a product of ${arrProduct}.`];
+    // CLASS 06 REVIEW: Changed to use array-to-string behavior, refer to previous comment.
+    // `The numbers ${arrString} have a product of ${arrProduct}.`];
+    `The numbers ${dynamicArray} have a product of ${arrProduct}.`];
 }
 
 // Here is the test for multiplyArray(); uncomment it to run it
